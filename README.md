@@ -32,6 +32,37 @@ This project demonstrates a comprehensive PySpark data processing pipeline using
 | dropoff_longitude | Longitude where the meter was disengaged. |
 
 ---
+# Quick Start Guide - PySpark Pipeline
+
+*Ensure Java is UTD (v17 and above)
+*Donwload dataset from link and keep in local directory within repository.
+
+### Step 1: Install Dependencies
+
+```bash
+# Clone or navigate to project directory
+cd pyspark-pipeline
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # Windows: venv\Scripts\activate
+
+# Install requirements
+pip install -r requirements.txt
+```
+
+### Step 2: Run the Pipeline
+
+**Option A: Jupyter Notebook (Recommended)**
+```bash
+jupyter notebook pyspark_pipeline.ipynb
+```
+Then run all cells (Cell → Run All)
+
+**Option B: Python Script**
+```bash
+python pyspark_pipeline_script.py
+```
 
 
 ---
