@@ -285,6 +285,9 @@ ORDER BY is_weekend, time_of_day
 - Rush hour: +30% duration
 - Late night: -20% duration (less traffic)
 
+### Analysis Results Visualization
+![Taxi Analysis Dashboard](outputs/taxi_analysis_dashboard.png)
+
 ---
 ## Screenshots
 
