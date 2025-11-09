@@ -288,25 +288,16 @@ ORDER BY is_weekend, time_of_day
 ---
 ## Screenshots
 
-#### 1. Query execution plan (.explain() output or Spark UI)
+#### 1. Query execution plan (.explain() output)
 **Location**: Cell output from `.explain()` method
 
-**What to capture**:
-- Physical execution plan showing optimization
-- Filter pushdown evidence
-- Join strategy (Broadcast vs SortMerge)
-
-**File**: `screenshots/execution_plan.png`
+**File**: `execution.png`
 
 #### 2. Successful pipeline execution
-**File**: `screenshots/spark_ui_jobs.png`
+
+**File**: `success.png`
 
 #### 3. Query Details view showing optimization
 
-**What to capture**:
-- Query execution timeline
-- Number of shuffle operations
-- Data volume processed
-
-**File**: `screenshots/spark_ui_sql.png`
+**File**: `query.png`
 ---
