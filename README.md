@@ -30,7 +30,7 @@ This project demonstrates a comprehensive PySpark data processing pipeline using
 | dropoff_longitude | Longitude where the meter was disengaged. |
 
 ---
-# Quick Start Guide - PySpark Pipeline
+## Setup Guide
 
 *Ensure Java is UTD (v17 and above)
 
@@ -87,7 +87,7 @@ pip install -r requirements.txt
 - `is_weekend`: Binary weekend flag
 - `time_of_day`: Categorical time period (Morning/Afternoon/Evening/Night)
 
-### 2. SQL Queries (2+)
+### 2. SQL Queries
 
 #### Query 1: Hourly Trip Statistics
 ```sql
@@ -288,9 +288,7 @@ ORDER BY is_weekend, time_of_day
 ---
 ## Screenshots
 
-### Required Screenshots (to be added after execution)
-
-#### 1. Query Execution Plan
+#### 1. Query execution plan (.explain() output or Spark UI)
 **Location**: Cell output from `.explain()` method
 
 **What to capture**:
@@ -300,11 +298,10 @@ ORDER BY is_weekend, time_of_day
 
 **File**: `screenshots/execution_plan.png`
 
-#### 2. Spark UI - Jobs Tab
+#### 2. Successful pipeline execution
 **File**: `screenshots/spark_ui_jobs.png`
 
-#### 3. Spark UI - SQL Tab
-**Location**: http://localhost:4040/SQL/
+#### 3. Query Details view showing optimization
 
 **What to capture**:
 - Query execution timeline
@@ -312,36 +309,4 @@ ORDER BY is_weekend, time_of_day
 - Data volume processed
 
 **File**: `screenshots/spark_ui_sql.png`
-
-#### 4. Query Details View
-**Location**: Click on a specific query in Spark UI
-
-**What to capture**:
-- DAG visualization
-- Stage breakdown
-- Shuffle read/write metrics
-- Task distribution
-
-**File**: `screenshots/query_details.png`
-
-#### 5. Successful Pipeline Execution
-**Location**: Jupyter notebook or terminal output
-
-**What to capture**:
-- All cells executed successfully
-- Final summary output
-- Output files created confirmation
-
-**File**: `screenshots/pipeline_success.png`
-
-#### 6. Caching Performance Comparison
-**Location**: Cell output from caching demo
-
-**What to capture**:
-- Timing comparison table
-- Performance improvement percentage
-- Cache status information
-
-**File**: `screenshots/caching_performance.png`
-
 ---
