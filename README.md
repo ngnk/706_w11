@@ -289,15 +289,20 @@ ORDER BY is_weekend, time_of_day
 ## Screenshots
 
 #### 1. Query execution plan (.explain() output)
-**Location**: Cell output from `.explain()` method
+![Execution Plan - Notebook](execution.png)
 
-**File**: `execution.png`
+
 
 #### 2. Successful pipeline execution
 
-**File**: `success.png`
+![Success - Notebook](success.png)
 
-#### 3. Query Details view showing optimization
+![Success- Spark](success2.png)
 
-**File**: `query.png`
+#### 3. Query Details
+
+![Details](query1.png)
+
+![Details Continued...](query2.png)
+
 ---
