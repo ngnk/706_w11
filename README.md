@@ -1,79 +1,60 @@
 # PySpark Data Processing Pipeline - Week 11 Assignment
 
-## 📊 Project Overview
+## Project Overview
 
 This project demonstrates a comprehensive PySpark data processing pipeline using NYC Taxi Trip data, showcasing distributed data processing, query optimization, and performance analysis.
 
-**Author**: Tony  
-**Program**: Duke MIDS  
-**Course**: IDS 721 - Week 11 Assignment
-
 ---
 
-## 📁 Dataset Description
+## Dataset Description
 
 ### NYC Taxi & Limousine Commission Trip Data
 
-**Source**: [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
+**Source**: [NYC Taxi Data - January 2016](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data?select=yellow_tripdata_2016-01.csv)
 
-**Format**: Parquet (columnar storage format)
+**Format**: .csv
 
-**Size**: 1GB+ per month (millions of records)
+**Size**: 1.7GB
 
-**Date Range**: January 2023 (expandable to multiple months)
+### Data Description
 
-### Dataset Schema
-
-| Column | Type | Description |
-|--------|------|-------------|
-| VendorID | Integer | Provider code (1=Creative, 2=VeriFone) |
-| tpep_pickup_datetime | Timestamp | Trip pickup timestamp |
-| tpep_dropoff_datetime | Timestamp | Trip dropoff timestamp |
-| passenger_count | Integer | Number of passengers |
-| trip_distance | Double | Trip distance in miles |
-| fare_amount | Double | Fare amount in dollars |
-| tip_amount | Double | Tip amount in dollars |
-| total_amount | Double | Total charge to passenger |
-| payment_type | Integer | Payment method (1=Credit, 2=Cash, etc.) |
-| PULocationID | Integer | Pickup location zone ID |
-| DOLocationID | Integer | Dropoff location zone ID |
-
-### How to Download Data
-
-```bash
-# Download January 2023 data (700MB+)
-wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-01.parquet
-
-# Download multiple months (optional)
-wget https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2023-{01..03}.parquet
-```
-
-**Note**: The notebook also includes a synthetic data generator if you cannot download the actual dataset.
+| Column | Description |
+|--------|-------------|
+| VendorID | A code indicating the TPEP provider that provided the record.  |
+| tpep_pickup_datetime | The date and time when the meter was engaged.v |
+| tpep_dropoff_datetime | The date and time when the meter was disengaged. |
+| passenger_count | The number of passengers in the vehicle. This is a driver-entered value. |
+| trip_distance | The elapsed trip distance in miles reported by the taximeter. |
+| pickup_longitude | Longitude where the meter was engaged. |
+| pickup_latitude | Latitude where the meter was engaged. |
+| RateCodeID | The final rate code in effect at the end of the trip. |
+| store_and_fwd_flag | This flag indicates whether the trip record was held in vehicle memory before sending to the vendor, aka “store |
+| dropoff_longitude | Longitude where the meter was disengaged. |
 
 ---
 
-## 🎯 Pipeline Components
+## Pipeline Components
 
 ### 1. Data Transformations
 
-#### ✅ Filters (2+)
+#### Filters (2+)
 - **Data Quality Filter**: Removed invalid records with negative/zero values
 - **Range Filter**: Filtered outliers (trip_distance < 100, fare_amount < 500)
 - **Passenger Filter**: Only trips with 1-6 passengers
 - **Date Range Filter**: Optional temporal filtering
 
-#### ✅ Join Operation
+#### Join Operation
 - **Broadcast Join**: Joined trips with taxi zone lookup data
 - **Optimization**: Used broadcast hint to avoid shuffle
 - **Enrichment**: Added pickup zone, borough, and service zone information
 
-#### ✅ GroupBy Aggregations
+#### GroupBy Aggregations
 - **Hourly Statistics**: Trips grouped by hour with avg fare, distance, tip
 - **Passenger Analysis**: Aggregated metrics by passenger count
 - **Weekend vs Weekday**: Compared patterns across day types and times
 - **Payment Type Analysis**: Cross-tabulation with time of day
 
-#### ✅ Column Transformations (withColumn)
+#### Column Transformations (withColumn)
 - `pickup_hour`: Extracted hour from pickup timestamp
 - `pickup_dayofweek`: Day of week (1=Sunday, 7=Saturday)
 - `trip_duration_minutes`: Calculated from pickup/dropoff times
@@ -118,22 +99,22 @@ ORDER BY is_weekend, time_of_day
 
 ### 3. Query Optimizations
 
-#### ✅ Early Filtering
+#### Early Filtering
 - Applied all filters immediately after data loading
 - Reduced dataset size before expensive operations
 - Leveraged Parquet predicate pushdown
 
-#### ✅ Column Pruning
+#### Column Pruning
 - Selected only necessary columns early in pipeline
 - Reduced memory footprint and I/O
 - Parquet columnar format enabled efficient column-level reads
 
-#### ✅ Appropriate Partitioning
+#### Appropriate Partitioning
 - Repartitioned by `pickup_hour` for efficient aggregations
 - Used 200 partitions (optimized for cluster size)
 - Output data partitioned for query efficiency
 
-#### ✅ Shuffle Avoidance
+#### Shuffle Avoidance
 - Used broadcast join for small dimension tables
 - Avoided unnecessary wide transformations
 - Leveraged Adaptive Query Execution (AQE)
@@ -148,7 +129,7 @@ ORDER BY is_weekend, time_of_day
 
 ---
 
-## 📈 Performance Analysis
+## Performance Analysis
 
 ### Spark Query Optimization
 
@@ -318,7 +299,7 @@ count = df_selected.count()  # NOW computation happens!
 
 ---
 
-## 📊 Key Findings from Data Analysis
+## Key Findings from Data Analysis
 
 ### 1. Temporal Patterns
 
@@ -370,7 +351,7 @@ count = df_selected.count()  # NOW computation happens!
 
 ---
 
-## 🚀 Setup and Execution
+## Setup and Execution
 
 ### Prerequisites
 
@@ -435,7 +416,7 @@ spark = SparkSession.builder \
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Required Screenshots (to be added after execution)
 
@@ -517,7 +498,7 @@ spark = SparkSession.builder \
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 pyspark-pipeline/
@@ -543,39 +524,39 @@ pyspark-pipeline/
 
 ---
 
-## 🎓 Learning Outcomes Demonstrated
+## Learning Outcomes Demonstrated
 
 ### 1. Distributed Data Processing
-✅ Processing 1GB+ dataset using PySpark  
-✅ Understanding of partitioning and parallelization  
-✅ Efficient handling of large-scale data
+- Processing 1GB+ dataset using PySpark  
+- Understanding of partitioning and parallelization  
+- Efficient handling of large-scale data
 
 ### 2. Lazy Evaluation
-✅ Clear demonstration of transformations vs actions  
-✅ Understanding of DAG construction  
-✅ Query plan optimization
+- Clear demonstration of transformations vs actions  
+- Understanding of DAG construction  
+- Query plan optimization
 
 ### 3. Query Optimization
-✅ Filter pushdown to data source  
-✅ Column pruning for efficiency  
-✅ Broadcast join for small tables  
-✅ Appropriate partitioning strategies
+- Filter pushdown to data source  
+- Column pruning for efficiency  
+- Broadcast join for small tables  
+- Appropriate partitioning strategies
 
 ### 4. Performance Analysis
-✅ Using `.explain()` for plan analysis  
-✅ Identifying bottlenecks (shuffles, skew)  
-✅ Measuring optimization impact  
-✅ Caching for repeated operations
+- Using `.explain()` for plan analysis  
+- Identifying bottlenecks (shuffles, skew)  
+- Measuring optimization impact  
+- Caching for repeated operations
 
 ### 5. SQL and DataFrame API
-✅ Complex SQL queries with aggregations  
-✅ DataFrame transformations and actions  
-✅ Seamless switching between APIs  
-✅ Window functions and advanced operations
+- Complex SQL queries with aggregations  
+- DataFrame transformations and actions  
+- Seamless switching between APIs  
+- Window functions and advanced operations
 
 ---
 
-## 🔧 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -613,45 +594,3 @@ spark = SparkSession.builder \
 ```
 
 ---
-
-## 📚 References
-
-- [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
-- [PySpark Documentation](https://spark.apache.org/docs/latest/api/python/)
-- [Spark SQL Performance Tuning](https://spark.apache.org/docs/latest/sql-performance-tuning.html)
-- [Catalyst Optimizer](https://databricks.com/glossary/catalyst-optimizer)
-- [Adaptive Query Execution](https://spark.apache.org/docs/latest/sql-performance-tuning.html#adaptive-query-execution)
-
----
-
-## 🏆 Bonus Features Implemented
-
-- ✅ Caching optimization with performance comparison
-- ✅ Broadcast join optimization
-- ✅ Synthetic data generator for easy testing
-- ✅ Comprehensive visualizations
-- ✅ Detailed performance analysis
-- ✅ Production-ready partitioning strategy
-
----
-
-## 📝 Notes
-
-- Pipeline tested with 10M+ records
-- Execution time: ~5-10 minutes on 4-core machine
-- Scales linearly with data size
-- Optimized for both local and cluster execution
-
----
-
-## 👤 Author
-
-**Tony**  
-Duke University - MIDS Program  
-IDS 721 - Data Engineering
-
----
-
-## 📄 License
-
-This project is for educational purposes as part of Duke MIDS coursework.
