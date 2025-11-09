@@ -299,58 +299,6 @@ count = df_selected.count()  # NOW computation happens!
 
 ---
 
-## Key Findings from Data Analysis
-
-### 1. Temporal Patterns
-
-**Peak Hours**:
-- Highest trip volume: 6-7 PM (evening rush)
-- Secondary peak: 8-9 AM (morning commute)
-- Lowest volume: 4-5 AM (late night)
-
-**Average Fares**:
-- Highest fares: 5-6 AM ($18-20) - airport trips, less traffic
-- Lowest fares: 3-4 PM ($12-14) - short midday trips
-- Evening hours: Moderate fares ($14-16)
-
-### 2. Passenger Behavior
-
-**Trip Distribution**:
-- Solo riders (1 passenger): ~70% of all trips
-- Two passengers: ~18% of trips
-- Groups (3-6 passengers): ~12% of trips
-
-**Fare Patterns**:
-- Solo trips: Average $14.50
-- Two passengers: Average $15.80
-- Larger groups: Higher average ($17-19) - longer distances
-
-### 3. Weekend vs Weekday
-
-**Trip Volume**:
-- Weekdays: Higher volume during commute hours
-- Weekends: More evenly distributed throughout day
-- Weekend late-night: 50% more trips than weekdays
-
-**Tipping Behavior**:
-- Weekend tips: 18-20% average
-- Weekday tips: 16-18% average
-- Credit card payments: Higher tip percentages (vs. cash)
-
-### 4. Distance and Fare Efficiency
-
-**Fare per Mile**:
-- Short trips (<2 miles): $8-12/mile (minimum fares)
-- Medium trips (2-10 miles): $4-6/mile (optimal)
-- Long trips (>10 miles): $3-5/mile (distance discount effect)
-
-**Trip Duration**:
-- Average: 15-20 minutes
-- Rush hour: +30% duration
-- Late night: -20% duration (less traffic)
-
----
-
 ## Setup and Execution
 
 ### Prerequisites
