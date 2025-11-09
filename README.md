@@ -51,8 +51,6 @@ pip install -r requirements.txt
 ```
 
 ### Step 2: Run the Pipeline
-**Option B: Python Script**
-
 - Open in VSCode and run all cells or cell-by-cell as desired.
 
 ---
