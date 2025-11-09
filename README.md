@@ -256,7 +256,7 @@ BroadcastHashJoin [PULocationID#56], [LocationID#98]
 
 ---
 
-## 🔍 Lazy vs Eager Evaluation Demonstration
+## Lazy vs Eager Evaluation Demonstration
 
 ### Transformations (Lazy)
 
@@ -444,34 +444,6 @@ spark = SparkSession.builder \
 3. Navigate to Jobs, Stages, or SQL tab
 4. Capture execution details
 
----
-
-## Project Structure
-
-```
-pyspark-pipeline/
-├── pyspark_pipeline.ipynb          # Main pipeline notebook
-├── README.md                        # This file
-├── requirements.txt                 # Python dependencies
-├── screenshots/                     # Performance screenshots
-│   ├── execution_plan.png
-│   ├── spark_ui_jobs.png
-│   ├── spark_ui_sql.png
-│   ├── query_details.png
-│   ├── pipeline_success.png
-│   └── caching_performance.png
-├── outputs/                         # Pipeline outputs
-│   ├── hourly_stats.parquet/
-│   ├── passenger_stats.parquet/
-│   ├── weekend_comparison.parquet/
-│   ├── processed_trips.parquet/
-│   └── taxi_analysis_dashboard.png
-└── data/                           # Input data (not in repo)
-    └── yellow_tripdata_2023-*.parquet
-```
-
----
-
 ## Learning Outcomes Demonstrated
 
 ### 1. Distributed Data Processing
@@ -501,44 +473,5 @@ pyspark-pipeline/
 - DataFrame transformations and actions  
 - Seamless switching between APIs  
 - Window functions and advanced operations
-
----
-
-## Troubleshooting
-
-### Common Issues
-
-**1. Memory Errors**
-```python
-# Increase executor memory
-spark.conf.set("spark.executor.memory", "8g")
-
-# Reduce partition count if needed
-df = df.coalesce(100)
-```
-
-**2. Slow Shuffle Operations**
-```python
-# Increase shuffle partitions for large data
-spark.conf.set("spark.sql.shuffle.partitions", "400")
-
-# Enable AQE
-spark.conf.set("spark.sql.adaptive.enabled", "true")
-```
-
-**3. Parquet File Not Found**
-```python
-# Use synthetic data generator in notebook
-df_raw = generate_synthetic_taxi_data(10_000_000)
-```
-
-**4. Spark UI Not Accessible**
-```python
-# Check if port is in use
-# Change port if needed
-spark = SparkSession.builder \
-    .config("spark.ui.port", "4041") \
-    .getOrCreate()
-```
 
 ---
